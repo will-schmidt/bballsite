@@ -1,22 +1,29 @@
-.App {
-  text-align: center;
+/* CSS reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  list-style: none;
 }
 
-.App-logo {
-  height: 40vmin;
+@import url('https://fonts.googleapis.com/css?family=Montserrat|PT+Sans&display=swap');
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: 'Montserrat', sans-serif;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+body {
+  font-family: 'PT Sans', sans-serif;
 }
 
-.App-link {
-  color: #09d3ac;
+.container {
+  max-width: 1170px;
+  margin: 0 auto;
+}
+
+h1 span {
+  color: #26d975;
 }
