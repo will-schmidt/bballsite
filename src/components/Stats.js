@@ -1,33 +1,14 @@
 import React, { Component } from 'react'
 import axios from 'axios'
 
+
 export default class Stats extends Component {
   state = {
     stats: []
   }
   async componentDidMount() {
-    // const response = await axios('https://www.balldontlie.io/api/v1/stats')
-
-    // let output = ''
-
-    // console.log(response)
-    // if (response.status === 200) {
-    //   response.data.data.forEach(function(stat) {
-    //     output += `<ul>
-    //     <li>Player: ${stat.player.first_name} ${stat.player.last_name}</li>
-    //     <li>Height: ${stat.player.height_feet}'${stat.player.height_inches}"</li>
-    //     <li>Position: ${stat.player.position}</li>
-    //     <li>Team: ${stat.team.full_name}</li>
-    //     </u>
-    //     `
-    //   })
-    // } else {
-    //   console.log('Something went wrong')
-    // }
-    // console.log(output)
-    axios
-      .get('https://www.balldontlie.io/api/v1/stats')
-      .then(res => this.setState({ stats: res.data.data }))
+    const res = await axios('https://www.balldontlie.io/api/v1/stats?seasons[]=2019')
+    this.setState({stats: res.data.data})
   }
 
   render() {
@@ -35,7 +16,17 @@ export default class Stats extends Component {
       <div className="container" style={HomeStats}>
         <h2>Stats &amp; Rankings</h2>
         {console.log(this.state.stats)}
-        this.state.stats.forEach(i => {console.log(i)});
+        {this.state.stats.map(stat => {
+          return (
+            <React.Fragment>
+            <h3>{stat.player.first_name} {stat.player.last_name}</h3>
+            <ul>
+              <li><strong>{stat.team.full_name}</strong></li>
+              <li><strong>Height: </strong>{stat.player.height_feet}'{stat.player.height_inches}"</li>
+            </ul>
+            </React.Fragment>
+          )
+        })}
       </div>
     )
   }
