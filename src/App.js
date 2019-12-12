@@ -3,7 +3,7 @@ import React from 'react'
 import './App.css'
 import Header from './components/layout/Header'
 import Hero from './components/layout/Hero'
-import Stats from './components/Stats'
+import Teams from './components/Teams'
 
 class App extends React.Component {
   state = {
@@ -36,7 +36,7 @@ class App extends React.Component {
       <div className="App">
         <Header />
         <Hero />
-        <Stats />
+        <Teams />
       </div>
     )
   }
