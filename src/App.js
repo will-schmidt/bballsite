@@ -1,9 +1,23 @@
 import React from 'react'
 // import axios from 'axios'
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link
+} from "react-router-dom";
 import './App.css'
 import Header from './components/layout/Header'
 import Hero from './components/layout/Hero'
 import Teams from './components/Teams'
+import Team from './components/Team'
+
+const Home = () => (
+  <React.Fragment>
+    <Hero />
+    <Teams />
+  </React.Fragment>
+)
 
 class App extends React.Component {
   state = {
@@ -33,11 +47,19 @@ class App extends React.Component {
 
   render() {
     return (
+      <Router>
       <div className="App">
         <Header />
-        <Hero />
-        <Teams />
+        <Switch>
+          <Route path='/' exact component={Home} />
+          <Route path='/team/:teamId' component={Team}/>
+        </Switch>
+        
+        
+          
+       
       </div>
+      </Router>
     )
   }
 }

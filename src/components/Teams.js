@@ -1,5 +1,11 @@
 import React, { Component } from 'react'
 import axios from 'axios'
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link
+} from "react-router-dom"
 import bgImage from '../assets/images/greybackground.jpg'
 
 export default class Teams extends Component {
@@ -20,7 +26,7 @@ export default class Teams extends Component {
           return (
           <div style={TeamCard}>
             <div style={TeamCardInner}>
-            <a href="#"><img src={teamImg} alt={`${team.full_name} logo`} style={TeamLogo}/></a>
+            <Link to={`/team/${team.id}`}><img src={teamImg} alt={`${team.full_name} logo`} style={TeamLogo}/></Link>
             </div>
             <a href="#"><h3 style={TeamTitle}>{team.full_name}</h3></a>
             
