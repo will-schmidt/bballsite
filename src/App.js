@@ -11,6 +11,7 @@ import Header from './components/layout/Header'
 import Hero from './components/layout/Hero'
 import Teams from './components/Teams'
 import Team from './components/Team'
+import About from './components/About'
 
 const Home = () => (
   <React.Fragment>
@@ -50,9 +51,11 @@ class App extends React.Component {
       <Router>
       <div className="App">
         <Header />
+
         <Switch>
           <Route path='/' exact component={Home} />
           <Route path='/team/:teamId' component={Team}/>
+          <Route path='/about' component={About}/>
         </Switch>
         
         

@@ -27,3 +27,8 @@ body {
 h1 span {
   color: #26d975;
 }
+
+.header-nav li {
+  display: inline;
+  margin-right: 1rem;
+}
