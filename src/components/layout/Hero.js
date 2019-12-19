@@ -26,7 +26,8 @@ export default function Hero() {
 }
 
 const HeaderStyle = {
-  padding: '2rem 0',
+  paddingTop: '2rem',
+  paddingBottom: '2rem',
   display: 'flex',
   justifyContent: 'space-between'
 }

@@ -33,7 +33,7 @@ const logoStyle = {
 
 const headerStyleContainer = {
   borderBottom: '2px solid #000',
-  padding: '1rem 0',
+  padding: '1rem 1rem',
   display: 'flex',
   alignItems: 'flex-end'
 }
