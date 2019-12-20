@@ -10,7 +10,7 @@ import './App.css'
 import Header from './components/layout/Header'
 import Hero from './components/layout/Hero'
 import Teams from './components/Teams'
-import Team from './components/Team'
+import Team from './pages/Team'
 import About from './components/About'
 
 const Home = () => (

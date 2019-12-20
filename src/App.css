@@ -33,3 +33,11 @@ h1 span {
   display: inline;
   margin-right: 1rem;
 }
+
+.team-img-wrapper {
+  max-width: 200px;
+}
+
+.team-img-wrapper img {
+  width: 100%;
+}

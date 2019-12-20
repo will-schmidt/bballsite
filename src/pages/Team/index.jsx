@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import axios from 'axios'
+import './team.css'
 
 export default class Team extends Component {
   state = {
@@ -25,8 +26,11 @@ export default class Team extends Component {
   render() {
     if(!this.state.team) return null
     return (
-      <section className="container" style={IndividualTeam}>
-        <img src={`http://i.cdn.turner.com/nba/nba/.element/img/1.0/teamsites/logos/teamlogos_500x500/${(this.state.team.abbreviation).toLowerCase()}.png`} alt={this.state.team.full_name} style={TeamLogo} />
+      <section className="Team container" style={IndividualTeam}>
+        <div className='team-img-wrapper' >
+          <img src={`http://i.cdn.turner.com/nba/nba/.element/img/1.0/teamsites/logos/teamlogos_500x500/${(this.state.team.abbreviation).toLowerCase()}.png`} alt={this.state.team.full_name}  />
+        </div>
+       
         <div style={TeamDetails}>
           <h1>{this.state.team.full_name}</h1>
           <ul>
@@ -38,22 +42,20 @@ export default class Team extends Component {
         <div>
           <ul>
           {this.state.games.map( (game, i) => {
+
             return (
-              <div>
-                <h3>Game</h3>
+              <div key={game.id}>
+                <h3>{game.home_team.full_name} V {game.visitor_team.full_name}</h3>
+                
                 <ul>
-                <li key={i}>{game.date}</li>
-                <li key={i}>{game.home_team_score} - {game.visitor_team_score}</li>
+                <li >{game.date}</li>
+                <li >{game.home_team_score} - {game.visitor_team_score}</li>
                 </ul>
               </div>
-            
             )
           })}
           </ul>
         </div>
-
-        
-
         </section>
 
     )
@@ -66,9 +68,9 @@ const IndividualTeam = {
   display: 'flex'
 }
 
-const TeamLogo = {
-  maxWidth: '200px'
-}
+// const TeamLogo = {
+//   maxWidth: '200px'
+// }
 
 const TeamDetails = {
   paddingTop: '2rem'
