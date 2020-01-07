@@ -11,7 +11,7 @@ import Header from './components/layout/Header'
 import Hero from './components/layout/Hero'
 import Teams from './components/Teams'
 import Team from './pages/Team'
-import About from './components/About'
+import About from './pages/About'
 
 const Home = () => (
   <React.Fragment>
