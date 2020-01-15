@@ -17,7 +17,7 @@ export default function Header() {
         <FontAwesomeIcon icon={faBasketballBall} />BBall Data
         </Link>
         <ul className="header-nav">
-          <li><NavLink to='/' activeClassName="active">Home</NavLink></li>
+          <li><NavLink to='/' exact activeClassName="active">Home</NavLink></li>
           <li><NavLink to='/about' activeClassName="active">About</NavLink></li>
         </ul>
       </div>

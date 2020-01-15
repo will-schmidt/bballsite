@@ -1,6 +1,12 @@
 import React, { Component } from 'react'
-import Moment from 'react-moment'
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link
+} from "react-router-dom"
 import axios from 'axios'
+import moment from 'moment'
 import './team.css'
 
 export default class Team extends Component {
@@ -16,21 +22,26 @@ export default class Team extends Component {
       team: teamResponse.data
     })
 
-    const dateTo = Moment().format('YYYY-MM-DD')
+    const dateTo = moment().format('YYYY-MM-DD')
+    const dateFrom = moment().subtract(10,'d').format('YYYY-MM-DD')
  
 
-    console.log(`Date... ${dateTo}` )
-
-    const gamesResponse = await axios(`https://www.balldontlie.io/api/v1/games?team_ids[]=${this.props.match.params.teamId}&start_date=2019-12-08&end_date=2019-12-19`)
+    const gamesResponse = await axios(`https://www.balldontlie.io/api/v1/games?team_ids[]=${this.props.match.params.teamId}&start_date=${dateFrom}&end_date=${dateTo}`)
     console.log(gamesResponse.data)
 
     this.setState({
       games: gamesResponse.data.data
     })
+
+    
   }
+  
+  
   
   render() {
     
+
+
     if(!this.state.team) return null
     return (
       
@@ -42,7 +53,7 @@ export default class Team extends Component {
        
         <div style={TeamDetails}>
           <h1>{this.state.team.full_name}</h1>
-          <Moment format="YYYY/MM/DD">{this.props.dateToFormat}</Moment>
+          
           <ul>
             <li><strong>{this.state.team.division} Division</strong></li>
             <li>{this.state.team.conference}ern Conference</li>
@@ -52,13 +63,33 @@ export default class Team extends Component {
         <div>
           <ul>
           {this.state.games.map( (game) => {
-
+              let isHomeTeam
+              let wonGame
+              if (game.home_team.id === this.props.match.params.teamId) {
+                isHomeTeam = true
+                if (game.home_team_score > game.visitor_team_score) {
+                  wonGame = true
+                } else {
+                  wonGame = false
+                }
+              } else {
+                isHomeTeam = false
+                if (game.visitor_team_score > game.home_team_score) {
+                  wonGame = true
+                } else {
+                  wonGame = false
+                }
+              }
+            
             return (
               <div key={game.id}>
-                <h3>{game.home_team.full_name} V {game.visitor_team.full_name}</h3>
+ 
+                <h3><Link exact to={`/team/${game.home_team.id}`}>{game.home_team.full_name}</Link> vs <Link to={`/team/${game.visitor_team.id}`}>{game.visitor_team.full_name}</Link></h3>
                 
                 <ul>
-                <li >{game.date}</li>
+                  <li>{wonGame ? `<span class="won">Won</span>` : `<span class="lost">Lost</span>`}</li>
+                  <li>{isHomeTeam ? 'Home game' : 'Away game'}</li>
+                <li >{game.date}></li>
                 <li >{game.home_team_score} - {game.visitor_team_score}</li>
                 </ul>
               </div>             

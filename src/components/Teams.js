@@ -26,9 +26,9 @@ export default class Teams extends Component {
           return (
           <div style={TeamCard}>
             <div style={TeamCardInner}>
-            <Link to={`/team/${team.id}`}><img src={teamImg} alt={`${team.full_name} logo`} style={TeamLogo}/></Link>
+            <Link exact to={`/team/${team.id}`}><img src={teamImg} alt={`${team.full_name} logo`} style={TeamLogo}/></Link>
             </div>
-            <Link to={`/team/${team.id}`}><h3 style={TeamTitle}>{team.full_name}</h3></Link>
+            <Link exact to={`/team/${team.id}`}><h3 style={TeamTitle}>{team.full_name}</h3></Link>
             
 
           </div>
