@@ -1,0 +1,32 @@
+section.Team {
+  padding: 2rem 1rem;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.game-details {
+  border-bottom: 1px solid rgb(228, 223, 218);
+  padding: 1rem 0.5rem;
+}
+
+h3 span {
+  padding: 2px;
+  background: grey;
+  color: #fff;
+  font-size: 0.8rem;
+  margin-right: 0.8rem;
+}
+
+span.won {
+  background: #26d975;
+}
+span.lost {
+  background: #e42b4e;
+}
+span.progress {
+  background: orange;
+}
+
+span.score {
+  font-size: 1.5rem;
+}

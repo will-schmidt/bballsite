@@ -24,6 +24,8 @@ export default class Team extends Component {
       `${baseUrl}/games?team_ids[]=${teamId}&start_date=${dateFrom}&end_date=${dateTo}`
     );
 
+    console.log(gamesResponse.data)
+
     this.setState({
       team: teamResponse.data,
       games: gamesResponse.data.data
@@ -47,7 +49,7 @@ export default class Team extends Component {
     if (!this.state.team) return null;
 
     return (
-      <section className="Team container" style={IndividualTeam}>
+      <section className="Team container">
         <div className="team-img-wrapper">
           <img
             src={`http://i.cdn.turner.com/nba/nba/.element/img/1.0/teamsites/logos/teamlogos_500x500/${this.state.team.abbreviation.toLowerCase()}.png`}
@@ -75,37 +77,33 @@ export default class Team extends Component {
               const oppositeTeamScore = !isHomeTeam
                 ? game.home_team_score
                 : game.visitor_team_score;
-              const wonGame = pageTeamScore > oppositeTeamScore;
-              const inProgress = pageTeamScore === 0 && oppositeTeamScore === 0;
+              const wonGame = pageTeamScore > oppositeTeamScore && game.status === "Final";
+              const gameScheduled = pageTeamScore === 0 && oppositeTeamScore === 0 && game.status !== "Final";
+              const inProgress = (pageTeamScore > 0 || oppositeTeamScore > 0) && game.status !== "Final"
 
               return (
-                <div key={game.id}>
-                  <h3>
+                <div key={game.id} className="game-details">
+                  <h3>{(!gameScheduled && !inProgress) ? 
+                        <span className={wonGame ? "won" : "lost"}>
+                          {wonGame ? "Won" : "Lost"}
+                        </span> : <span className={inProgress && "progress"}>{(inProgress ? "In progress" : (gameScheduled && "Scheduled"))}</span> }
                     <Link exact to={`/team/${game.home_team.id}`}>
                       {game.home_team.full_name}
                     </Link>
-                    vs
+                     &nbsp;vs&nbsp;
                     <Link to={`/team/${game.visitor_team.id}`}>
                       {game.visitor_team.full_name}
                     </Link>
                   </h3>
 
                   <ul>
-                    {inProgress ? (
-                      <li>In progress or Scheduled</li>
-                    ) : (
-                      <li>
-                        <span class={wonGame ? "won" : "lost"}>
-                          {wonGame ? "Won" : "Lost"}
-                        </span>
-                      </li>
-                    )}
-
+               
+                  <li>
+                      <span className="score">{game.home_team_score} - {game.visitor_team_score}</span>
+                    </li>
                     <li>{isHomeTeam ? "Home game" : "Away game"}</li>
                     <li>{game.date}></li>
-                    <li>
-                      {game.home_team_score} - {game.visitor_team_score}
-                    </li>
+                    
                   </ul>
                 </div>
               );
@@ -117,10 +115,7 @@ export default class Team extends Component {
   }
 }
 
-const IndividualTeam = {
-  padding: "2rem 1rem",
-  display: "flex"
-};
+
 
 // const TeamLogo = {
 //   maxWidth: '200px'
